@@ -58,18 +58,17 @@ app.listen(port, async () => {
 Use decoradores para associar métodos de uma classe a tópicos Kafka:
 
 ```typescript
-import { KafkaListener } from 'kafdecor-js';
-import { IKafkaMessage } from 'kafdecor-js';
+import { KafkaListener, IKafkaMessage } from 'kafdecor-js';
 
 export class KafkaService {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
     static handleMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-topic):', payload.message.value.toString());
+        console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
     }
 
     @KafkaListener({ topic: 'test-another-topic', groupId: 'test-group-another' })
     static handleAnotherMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-another-topic):', payload.message.value.toString());
+        console.log('Mensagem recebida do Kafka (test-another-topic):', payload.message);
     }
 }
 ```
@@ -83,11 +82,10 @@ export class KafkaService {
 Você também pode registrar funções diretamente para processar mensagens:
 
 ```typescript
-import { KafkaRegistry } from 'kafdecor-js';
-import { IKafkaMessage } from 'kafdecor-js';
+import { KafkaRegistry, IKafkaMessage } from 'kafdecor-js';
 
 function exampleFunctionKafka(payload: IKafkaMessage) {
-    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload));
+    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload.message));
 }
 
 app.listen(port, async () => {
@@ -107,9 +105,7 @@ Aqui está um exemplo completo combinando tudo o que foi discutido:
 
 ```typescript
 import express from 'express';
-import { KafkaRegistry } from 'kafdecor-js';
-import { IKafkaMessage } from 'kafdecor-js';
-import { KafkaListener } from 'kafdecor-js';
+import { KafkaRegistry, KafkaListener,IKafkaMessage } from 'kafdecor-js';
 
 const app = express();
 const port = 3002;
@@ -117,12 +113,12 @@ const port = 3002;
 export class KafkaService {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
     static handleMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-topic):', payload.message.value.toString());
+        console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
     }
 }
 
 function exampleFunctionKafka(payload: IKafkaMessage) {
-    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload));
+    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload.message));
 }
 
 app.listen(port, async () => {

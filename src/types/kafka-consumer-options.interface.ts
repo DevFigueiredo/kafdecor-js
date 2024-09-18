@@ -1,5 +1,8 @@
+import { ConsumerConfig, ConsumerSubscribeTopics } from "kafkajs";
 
 export interface IKafkaConsumerOptions {
-    topic: string;
-    groupId: string;
+    groupId: string
+    topic: string | RegExp;
+    fromBeginning?: boolean
+    options?: Omit<ConsumerConfig, "groupId">
 }

@@ -1,10 +1,10 @@
-Aqui está um README detalhado para o decorador `KafkaListener`, seguindo o mesmo formato que o README da classe `KafkaRegistry`.
+Aqui está um README detalhado para o decorator `KafkaListener`, seguindo o mesmo formato que o README da classe `KafkaRegistry`.
 
 ---
 
 # `KafkaListener`
 
-O decorador `KafkaListener` é utilizado para registrar métodos de uma classe como ouvintes de tópicos Kafka. Ele facilita a associação de métodos específicos a tópicos Kafka, permitindo que sua aplicação processe mensagens de forma modular e automatizada.
+O decorator `KafkaListener` é utilizado para registrar métodos de uma classe como ouvintes de tópicos Kafka. Ele facilita a associação de métodos específicos a tópicos Kafka, permitindo que sua aplicação processe mensagens de forma modular e automatizada.
 
 ## Tabelas de Conteúdo
 
@@ -14,11 +14,11 @@ O decorador `KafkaListener` é utilizado para registrar métodos de uma classe c
 
 ## Descrição Geral
 
-O decorador `KafkaListener` permite que você registre métodos de uma classe como ouvintes de mensagens Kafka para um tópico específico. Ele integra facilmente sua aplicação com Kafka, simplificando a configuração de ouvintes e o processamento de mensagens.
+O decorator `KafkaListener` permite que você registre métodos de uma classe como ouvintes de mensagens Kafka para um tópico específico. Ele integra facilmente sua aplicação com Kafka, simplificando a configuração de ouvintes e o processamento de mensagens.
 
 ## Como Usar
 
-Para usar o decorador `KafkaListener`, aplique-o a um método da sua classe que deve processar mensagens de um tópico Kafka. O decorador registra automaticamente o método no `KafkaRegistry`, que gerencia a execução do método quando mensagens são recebidas do tópico especificado.
+Para usar o decorator `KafkaListener`, aplique-o a um método da sua classe que deve processar mensagens de um tópico Kafka. O decorator registra automaticamente o método no `KafkaRegistry`, que gerencia a execução do método quando mensagens são recebidas do tópico especificado.
 
 ### Parâmetros
 
@@ -26,7 +26,7 @@ Para usar o decorador `KafkaListener`, aplique-o a um método da sua classe que 
   - `topic`: O tópico Kafka para o qual o método deve escutar.
   - `groupId`: O ID do grupo de consumidores ao qual o consumidor pertence.
 
-### Decorador
+### Decorator
 
 ```typescript
 export function KafkaListener(options: IKafkaConsumerOptions) {
@@ -39,10 +39,10 @@ export function KafkaListener(options: IKafkaConsumerOptions) {
 
 ## Exemplo de Uso
 
-Aqui está um exemplo de como usar o decorador `KafkaListener` em uma classe para processar mensagens de tópicos Kafka:
+Aqui está um exemplo de como usar o decorator `KafkaListener` em uma classe para processar mensagens de tópicos Kafka:
 
 ```typescript
-import { KafkaListener } from './kafka-listener-decorator'; // Importe o decorador KafkaListener
+import { KafkaListener } from './kafka-listener-decorator'; // Importe o decorator KafkaListener
 import { IKafkaMessage } from './types/kafka-message.interface';
 
 /**
@@ -72,8 +72,8 @@ export class MyKafkaService {
 }
 ```
 
-Este exemplo demonstra como aplicar o decorador `KafkaListener` a métodos de uma classe para processar mensagens recebidas de tópicos Kafka específicos. O `KafkaRegistry` é responsável por registrar e gerenciar esses ouvintes.
+Este exemplo demonstra como aplicar o decorator `KafkaListener` a métodos de uma classe para processar mensagens recebidas de tópicos Kafka específicos. O `KafkaRegistry` é responsável por registrar e gerenciar esses ouvintes.
 
 ---
 
-Este README fornece uma visão clara e detalhada sobre o uso do decorador `KafkaListener`, incluindo exemplos de aplicação prática. Se precisar de mais informações ou ajustes, é só avisar!
+Este README fornece uma visão clara e detalhada sobre o uso do decorator `KafkaListener`, incluindo exemplos de aplicação prática. Se precisar de mais informações ou ajustes, é só avisar!

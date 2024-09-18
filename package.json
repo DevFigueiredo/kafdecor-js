@@ -11,7 +11,8 @@
     "url": "https://github.com/DevFigueiredo/kafdecor-js.git"
   },
   "scripts": {
-    "start:dev": "tsx watch src/examples/server.ts",
+    "example01": "tsx watch src/examples/01-example-server-express.ts",
+    "example02": "tsx watch src/examples/02-example-server-express-functions.ts",
     "build": "tsc",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build"

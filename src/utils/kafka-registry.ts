@@ -1,7 +1,15 @@
-import { Kafka, KafkaConfig } from "kafkajs";
+import { ConsumerConfig, Kafka } from "kafkajs";
 import { safeParseJson } from "./safe-parse-json";
 import { IKafkaConsumerOptions } from "@src/types/kafka-consumer-options.interface";
+import { Listener } from "@src/types/listener.interface";
+import { IKafkaConfigureConsumer } from "@src/types/kafka-configure-consumer.interface";
+import { IKafkaConfig } from "@src/types/kafka-config.interface";
+import { IKafkaMessage } from "@src/types/kafka-message.interface";
 
+
+
+
+export type Listeners = Array<Listener>
 /**
  * Classe responsável pela integração e configuração de consumidores Kafka.
  */
@@ -10,7 +18,7 @@ export class KafkaRegistry {
      * Armazena os ouvintes registrados para os tópicos Kafka.
      * @private
      */
-    private static listeners: Array<{ target: any, method?: Function, options: IKafkaConsumerOptions }> = [];
+    private static listeners: Listeners = [];
 
     /**
      * Registra uma função para processar mensagens de um tópico Kafka.
@@ -36,8 +44,8 @@ export class KafkaRegistry {
      * @returns O consumidor Kafka conectado.
      * @private
      */
-    private static async createConsumer(kafka: Kafka, groupId: string) {
-        const consumer = kafka.consumer({ groupId: groupId });
+    private static async createConsumer(kafka: Kafka, consumerConfig: ConsumerConfig) {
+        const consumer = kafka.consumer({ ...consumerConfig });
         await consumer.connect();
         return consumer;
     }
@@ -50,12 +58,14 @@ export class KafkaRegistry {
      * @param target - O contexto (`this`) para o qual o método será chamado.
      * @private
      */
-    private static async configureConsumer(consumer: any, topic: string, methodToExecute: Function, target: any) {
+    private static async configureConsumer({ consumer, methodToExecute, target, topic, config }: IKafkaConfigureConsumer) {
         await consumer.subscribe({ topic: topic, fromBeginning: true });
         await consumer.run({
-            eachMessage: async ({ message }: any) => {
-                const formattedMessage = KafkaRegistry.formatMessage(message);
-                await KafkaRegistry.executeMethod(methodToExecute, target, { message: formattedMessage });
+            ...config,
+            eachMessage: async (data) => {
+                const formattedMessage = KafkaRegistry.formatMessage({ ...data.message, });
+                const input: IKafkaMessage = { message: formattedMessage, consumer, topic: data.topic, partition: data.partition }
+                await KafkaRegistry.executeMethod(methodToExecute, target, input);
             },
         });
     }
@@ -68,6 +78,7 @@ export class KafkaRegistry {
      */
     private static formatMessage(message: any) {
         return {
+            ...message,
             magicByte: message.magicByte,
             attributes: message.attributes,
             timestamp: message.timestamp,
@@ -105,16 +116,15 @@ export class KafkaRegistry {
      * Inicia a conexão com o Kafka e configura os consumidores para os tópicos registrados.
      * @param config - Configurações do Kafka, incluindo brokers e clientId.
      */
-    static async start(config: KafkaConfig) {
-        const kafka = new Kafka(config);
+    static async start({ config: configRun, ...restConfig }: IKafkaConfig) {
+        const kafka = new Kafka(restConfig);
         const listeners = KafkaRegistry.getListeners();
 
         for (const listener of listeners) {
             const { target, method, options } = listener;
-            const consumer = await KafkaRegistry.createConsumer(kafka, options.groupId);
-
+            const consumer = await KafkaRegistry.createConsumer(kafka, { ...options.options, groupId: options.groupId });
             if (KafkaRegistry.isValidMethod(method)) {
-                await KafkaRegistry.configureConsumer(consumer, options.topic, method, target);
+                await KafkaRegistry.configureConsumer({ consumer, topic: options.topic, methodToExecute: method, target, config: configRun });
             }
         }
     }
