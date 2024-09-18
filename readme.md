@@ -38,8 +38,7 @@ Crie um servidor Express básico e configure a integração com o Kafka:
 
 ```typescript
 import express from 'express';
-import { KafkaRegistry } from 'kafdecor-js'; // Importa a configuração do Kafka
-import { IKafkaMessage } from 'kafdecor-js'; // Define o tipo da mensagem Kafka
+import { KafkaRegistry, IKafkaMessage } from 'kafdecor-js'; // Importa a configuração do Kafka
 
 const app = express();
 const port = 3002;
