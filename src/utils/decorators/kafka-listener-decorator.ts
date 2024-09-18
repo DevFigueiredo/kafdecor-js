@@ -1,30 +1,19 @@
-import { Kafka } from 'kafkajs';
-import { KafkaRegistry } from '../kafka-registry';
+import { IKafkaConsumerOptions } from "@src/types/kafka-consumer-options.interface";
+import { KafkaRegistry } from "../kafka-registry";
 
-interface KafkaConsumerOptions {
-    topic: string;
-    groupId: string;
-}
-
-export function KafkaListener(options: KafkaConsumerOptions) {
+/**
+ * Decorador para registrar métodos como ouvintes de tópicos Kafka.
+ * 
+ * Este decorador associa um método de uma classe a um tópico Kafka, registrando-o no
+ * `KafkaRegistry` para que o método seja chamado quando mensagens forem recebidas
+ * do tópico especificado.
+ * 
+ * @param options - Configurações do consumidor Kafka, incluindo o tópico e o grupo.
+ * @returns Um decorador que registra o método como ouvinte de mensagens Kafka.
+ */
+export function KafkaListener(options: IKafkaConsumerOptions) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         // Registra o listener no registry global
-        KafkaRegistry.register(target, propertyKey, options);
-
-        // Substitui o método original para manter o comportamento
-        const originalMethod = descriptor.value;
-        descriptor.value = async function (...args: any[]) {
-            const kafka = new Kafka({ brokers: ['localhost:9092'], });
-            const consumer = kafka.consumer({ groupId: options.groupId });
-
-            await consumer.connect();
-            await consumer.subscribe({ topic: options.topic, fromBeginning: true });
-
-            await consumer.run({
-                eachMessage: async ({ message }) => {
-                    await originalMethod.apply(this, [message, ...args]);
-                },
-            });
-        };
+        KafkaRegistry.register(target[propertyKey], options);
     };
 }
