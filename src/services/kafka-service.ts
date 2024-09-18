@@ -1,4 +1,4 @@
-import { KafkaListener } from "@src/utils/decorators/kafka-listener";
+import { KafkaListener } from '@src/utils/decorators/kafka-listener-decorator';
 
 export class KafkaService {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
@@ -11,4 +11,3 @@ export class KafkaService {
         console.log('Mensagem recebida do Kafka (test-another-topic):', payload.message.value.toString());
     }
 }
-
