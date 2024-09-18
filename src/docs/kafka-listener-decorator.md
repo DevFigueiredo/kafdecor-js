@@ -48,7 +48,7 @@ import { IKafkaMessage } from './types/kafka-message.interface';
 /**
  * Serviço que processa mensagens de tópicos Kafka.
  */
-export class MyKafkaService {
+export class MyController {
     
     /**
      * Processa mensagens do tópico 'my-topic'.

@@ -59,7 +59,7 @@ Use decoradores para associar métodos de uma classe a tópicos Kafka:
 ```typescript
 import { KafkaListener, IKafkaMessage } from 'kafdecor-js';
 
-export class KafkaService {
+export class Controller {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
     static handleMessage(payload: IKafkaMessage) {
         console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
@@ -109,7 +109,7 @@ import { KafkaRegistry, KafkaListener,IKafkaMessage } from 'kafdecor-js';
 const app = express();
 const port = 3002;
 
-export class KafkaService {
+export class Controller {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
     static handleMessage(payload: IKafkaMessage) {
         console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
