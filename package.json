@@ -1,11 +1,15 @@
 {
   "name": "kafdecor-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Uma biblioteca para integração com Kafka usando decoradores e configuração modular.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Daniel Figueiredo",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevFigueiredo/kafdecor-js.git"
+  },
   "scripts": {
     "start:dev": "tsx watch src/examples/server.ts",
     "build": "tsc",

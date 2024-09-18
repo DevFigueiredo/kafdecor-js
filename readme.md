@@ -23,7 +23,13 @@ Esta biblioteca facilita a integração do Kafka, permitindo que você use decor
 Para começar a usar a biblioteca, instale as dependências necessárias com o npm:
 
 ```bash
-npm install kafka-express-integration
+npm install kafdecor-js
+```
+
+Para começar a usar a biblioteca, instale as dependências necessárias com o yarn:
+
+```bash
+yarn add kafdecor-js
 ```
 
 ## Configuração do Servidor Express
@@ -32,8 +38,8 @@ Crie um servidor Express básico e configure a integração com o Kafka:
 
 ```typescript
 import express from 'express';
-import { KafkaRegistry } from 'kafka-express-integration'; // Importa a configuração do Kafka
-import { IKafkaMessage } from 'kafka-express-integration/types'; // Define o tipo da mensagem Kafka
+import { KafkaRegistry } from 'kafdecor-js'; // Importa a configuração do Kafka
+import { IKafkaMessage } from 'kafdecor-js'; // Define o tipo da mensagem Kafka
 
 const app = express();
 const port = 3002;
@@ -52,8 +58,8 @@ app.listen(port, async () => {
 Use decoradores para associar métodos de uma classe a tópicos Kafka:
 
 ```typescript
-import { KafkaListener } from 'kafka-express-integration/decorators';
-import { IKafkaMessage } from 'kafka-express-integration/types';
+import { KafkaListener } from 'kafdecor-js';
+import { IKafkaMessage } from 'kafdecor-js';
 
 export class KafkaService {
     @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
@@ -77,8 +83,8 @@ export class KafkaService {
 Você também pode registrar funções diretamente para processar mensagens:
 
 ```typescript
-import { KafkaRegistry } from 'kafka-express-integration';
-import { IKafkaMessage } from 'kafka-express-integration/types';
+import { KafkaRegistry } from 'kafdecor-js';
+import { IKafkaMessage } from 'kafdecor-js';
 
 function exampleFunctionKafka(payload: IKafkaMessage) {
     console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload));
@@ -101,9 +107,9 @@ Aqui está um exemplo completo combinando tudo o que foi discutido:
 
 ```typescript
 import express from 'express';
-import { KafkaRegistry } from 'kafka-express-integration';
-import { IKafkaMessage } from 'kafka-express-integration/types';
-import { KafkaListener } from 'kafka-express-integration/decorators';
+import { KafkaRegistry } from 'kafdecor-js';
+import { IKafkaMessage } from 'kafdecor-js';
+import { KafkaListener } from 'kafdecor-js';
 
 const app = express();
 const port = 3002;
