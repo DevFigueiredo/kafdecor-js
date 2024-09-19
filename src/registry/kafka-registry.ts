@@ -116,7 +116,7 @@ export class KafkaRegistry {
      * Inicia a conexão com o Kafka e configura os consumidores para os tópicos registrados.
      * @param config - Configurações do Kafka, incluindo brokers e clientId.
      */
-    static async start({ config: configRun, ...restConfig }: IKafkaConfig | any) {
+    static async start({ config: configRun, ...restConfig }: IKafkaConfig) {
         const kafka = new Kafka(restConfig);
         const listeners = KafkaRegistry.getListeners();
 
