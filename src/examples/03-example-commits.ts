@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { KafkaRegistry } from '../registry/kafka-registry';
 import { IKafkaMessage } from '../types/kafka-message.interface';
 

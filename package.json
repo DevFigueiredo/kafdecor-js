@@ -1,6 +1,6 @@
 {
   "name": "kafdecor-js",
-  "version": "1.0.7-4",
+  "version": "1.0.7-3",
   "description": "Uma biblioteca para integração com Kafka usando decoradores e configuração modular.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,7 +40,6 @@
   "files": [
     "dist",
     "src/docs",
-    "src/@types/kafka.d.ts",
     "README.md"
   ]
 }

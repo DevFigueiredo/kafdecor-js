@@ -1,4 +1,4 @@
-import { Consumer } from "../@types/kafka";
+import { Consumer } from "kafkajs";
 
 
 export interface IKafkaMessage {

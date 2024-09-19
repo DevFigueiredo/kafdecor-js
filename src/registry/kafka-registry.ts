@@ -4,7 +4,7 @@ import { Listener } from "../types/listener.interface";
 import { IKafkaConfigureConsumer } from "../types/kafka-configure-consumer.interface";
 import { IKafkaConfig } from "../types/kafka-config.interface";
 import { IKafkaMessage } from "../types/kafka-message.interface";
-import { ConsumerConfig, Kafka } from "../@types/kafka";
+import { ConsumerConfig, Kafka } from "kafkajs";
 
 
 
@@ -35,6 +35,7 @@ export class KafkaRegistry {
     static getListeners() {
         return KafkaRegistry.listeners;
     }
+    
 
     /**
      * Cria e conecta um consumidor Kafka para o grupo especificado.
@@ -115,7 +116,7 @@ export class KafkaRegistry {
      * Inicia a conexão com o Kafka e configura os consumidores para os tópicos registrados.
      * @param config - Configurações do Kafka, incluindo brokers e clientId.
      */
-    static async start({ config: configRun, ...restConfig }: IKafkaConfig) {
+    static async start({ config: configRun, ...restConfig }: IKafkaConfig | any) {
         const kafka = new Kafka(restConfig);
         const listeners = KafkaRegistry.getListeners();
 
