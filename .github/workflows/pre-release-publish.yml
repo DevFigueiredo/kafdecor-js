@@ -1,9 +1,7 @@
-name: Publish Pre Release (Internal)
+name: Publish to npm (Pre release)
 
 on:
   workflow_dispatch:
-  release:
-      types: [prereleased]
       
 jobs:
   publish:

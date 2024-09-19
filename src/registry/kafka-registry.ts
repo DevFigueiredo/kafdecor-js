@@ -1,10 +1,10 @@
 import { ConsumerConfig, Kafka } from "kafkajs";
 import { safeParseJson } from "../utils/safe-parse-json";
-import { IKafkaConsumerOptions } from "@src/types/kafka-consumer-options.interface";
-import { Listener } from "@src/types/listener.interface";
-import { IKafkaConfigureConsumer } from "@src/types/kafka-configure-consumer.interface";
-import { IKafkaConfig } from "@src/types/kafka-config.interface";
-import { IKafkaMessage } from "@src/types/kafka-message.interface";
+import { IKafkaConsumerOptions } from "../types/kafka-consumer-options.interface";
+import { Listener } from "../types/listener.interface";
+import { IKafkaConfigureConsumer } from "../types/kafka-configure-consumer.interface";
+import { IKafkaConfig } from "../types/kafka-config.interface";
+import { IKafkaMessage } from "../types/kafka-message.interface";
 
 
 

@@ -11,11 +11,7 @@
     "rootDir": "./src", /* Define 'src' as the root for source files */
     "outDir": "./dist", /* Output compiled files to 'dist' */
     "baseUrl": "./", /* Allow non-relative imports based on the base directory */
-    "paths": {
-      "@src/*": [
-        "./src/*"
-      ]
-    },
+
 
     /* Emit Options */
     "declaration": true, /* Generate type declaration files (.d.ts) */
@@ -39,12 +35,6 @@
     "strictNullChecks": true, /* Ensure null and undefined are handled explicitly */
     "noImplicitAny": true, /* Disallow variables with 'any' type unless explicitly defined */
 
-    /* Paths Mapping */
-    "paths": {
-      "@src/*": [
-        "./src/*"
-      ]
-    }
   },
   "include": [
     "src/**/*.ts"
