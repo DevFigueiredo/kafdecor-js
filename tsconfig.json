@@ -11,7 +11,7 @@
     "rootDir": "./src", /* Define 'src' as the root for source files */
     "outDir": "./dist", /* Output compiled files to 'dist' */
     "baseUrl": "./", /* Allow non-relative imports based on the base directory */
-
+    // "declarationDir": "./dist/@types",
 
     /* Emit Options */
     "declaration": true, /* Generate type declaration files (.d.ts) */
@@ -41,8 +41,9 @@
       "./src/@types"  // Diretório adicional onde você pode armazenar tipos personalizados
     ],
   "include": [
-    "src/**/*.ts"
-  ],
+    "src/**/*.ts",
+    "src/@types/**/*.d.ts"
+    ],
   "exclude": [
     "node_modules",
     "dist",
