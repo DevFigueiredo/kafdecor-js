@@ -159,8 +159,7 @@ Neste exemplo, adicionamos o commit manual de offset, útil para garantir que a 
 
 ```typescript
 import express, { Request, Response } from "express";
-import { KafkaRegistry } from "kafdecor-js";
-import { IKafkaMessage } from "kafdecor-js";
+import { KafkaRegistry, IKafkaMessage } from "kafdecor-js";
 
 const app = express();
 const port = 3002;
