@@ -18,7 +18,7 @@ Uma biblioteca para integração simples e eficaz do Kafka. Esta biblioteca perm
  
 </p>
 
-## Tabelas de Conteúdo
+## Conteúdo
 
 - [Introdução](#introdução)
 - [Instalação](#instalação)
