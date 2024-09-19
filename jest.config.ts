@@ -84,6 +84,7 @@ const config: Config = {
     "cjs",
     "jsx",
     "ts",
+    "d.ts",
     "tsx",
     "json",
     "node"

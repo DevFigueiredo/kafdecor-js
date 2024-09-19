@@ -4,7 +4,7 @@ import { Listener } from "../types/listener.interface";
 import { IKafkaConfigureConsumer } from "../types/kafka-configure-consumer.interface";
 import { IKafkaConfig } from "../types/kafka-config.interface";
 import { IKafkaMessage } from "../types/kafka-message.interface";
-import { ConsumerConfig, Kafka } from "src/types/kafka";
+import { ConsumerConfig, Kafka } from "../@types/kafka";
 
 
 

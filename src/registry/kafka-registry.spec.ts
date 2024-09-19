@@ -2,7 +2,7 @@ import { mock, MockProxy } from "jest-mock-extended";
 import { IKafkaConsumerOptions } from "../types/kafka-consumer-options.interface";
 import { safeParseJson } from "../utils/safe-parse-json";
 import { KafkaRegistry } from "./kafka-registry";
-import { Consumer, Kafka } from "src/types/kafka";
+import { Consumer, Kafka } from "../@types/kafka";;
 
 type SutTypes = {
     kafka: MockProxy<Kafka>;

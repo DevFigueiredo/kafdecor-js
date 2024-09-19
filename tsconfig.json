@@ -36,6 +36,10 @@
     "noImplicitAny": true, /* Disallow variables with 'any' type unless explicitly defined */
 
   },
+  "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"  // Diretório adicional onde você pode armazenar tipos personalizados
+    ],
   "include": [
     "src/**/*.ts"
   ],

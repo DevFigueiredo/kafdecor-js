@@ -1,4 +1,4 @@
-import { ConsumerRunConfig, KafkaConfig } from "./kafka";
+import { ConsumerRunConfig, KafkaConfig } from "../@types/kafka";
 
 export interface IKafkaConfig extends KafkaConfig {
     config?: Omit<ConsumerRunConfig, "eachBatch" | "eachMessage">
