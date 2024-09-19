@@ -11,14 +11,8 @@ import { KafkaRegistry } from "../registry/kafka-registry";
  * @param options - Configurações do consumidor Kafka, incluindo o tópico e o grupo.
  * @returns Um decorador que registra o método como ouvinte de mensagens Kafka.
  */
-export function KafkaListener(options: IKafkaConsumerOptions) {
+export function KafkaListener(options: IKafkaConsumerOptions): any {
     return function (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor) {
-        if (descriptor) {
-            // Método de instância
-            KafkaRegistry.register(target[propertyKey], options);
-        } else {
-            // Método estático
-            KafkaRegistry.register(target[propertyKey], options);
-        }
+        KafkaRegistry.register(target[propertyKey], options);
     };
 }
