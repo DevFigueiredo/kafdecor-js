@@ -1,5 +1,5 @@
 import { KafkaRegistry } from '../registry/kafka-registry';
-import { IKafkaConsumerOptions } from '@src/types/kafka-consumer-options.interface';
+import { IKafkaConsumerOptions } from '../types/kafka-consumer-options.interface';
 import { KafkaListener } from './kafka-listener-decorator';
 
 // Mock KafkaRegistry
