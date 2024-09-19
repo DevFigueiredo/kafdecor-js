@@ -1,5 +1,5 @@
 import { IKafkaConsumerOptions } from "@src/types/kafka-consumer-options.interface";
-import { KafkaRegistry } from "../kafka-registry";
+import { KafkaRegistry } from "../registry/kafka-registry";
 
 /**
  * Decorador para registrar métodos como ouvintes de tópicos Kafka.

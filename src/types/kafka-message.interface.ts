@@ -2,9 +2,11 @@ import { Consumer } from "kafkajs";
 
 
 export interface IKafkaMessage {
-    topic: string
-    partition: number
-    consumer: Consumer
+    ctx: {
+        topic: string
+        partition: number
+        consumer: Consumer
+    }
     message: {
         magicByte: number;
         attributes: number;

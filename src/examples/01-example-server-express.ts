@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import { KafkaRegistry } from '../utils/kafka-registry';
+import { KafkaRegistry } from '../registry/kafka-registry';
 import { IKafkaMessage } from '../types/kafka-message.interface';
-import { KafkaListener } from '@src/utils/decorators/kafka-listener-decorator';
+import { KafkaListener } from '@src/decorators/kafka-listener-decorator';
 
 const app = express();
 const port = 3002;

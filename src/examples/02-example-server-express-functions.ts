@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { KafkaRegistry } from '../utils/kafka-registry';
+import { KafkaRegistry } from '../registry/kafka-registry';
 import { IKafkaMessage } from '../types/kafka-message.interface';
 
 const app = express();

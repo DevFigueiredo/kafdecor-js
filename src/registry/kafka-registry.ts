@@ -1,5 +1,5 @@
 import { ConsumerConfig, Kafka } from "kafkajs";
-import { safeParseJson } from "./safe-parse-json";
+import { safeParseJson } from "../utils/safe-parse-json";
 import { IKafkaConsumerOptions } from "@src/types/kafka-consumer-options.interface";
 import { Listener } from "@src/types/listener.interface";
 import { IKafkaConfigureConsumer } from "@src/types/kafka-configure-consumer.interface";
@@ -9,7 +9,6 @@ import { IKafkaMessage } from "@src/types/kafka-message.interface";
 
 
 
-export type Listeners = Array<Listener>
 /**
  * Classe responsável pela integração e configuração de consumidores Kafka.
  */
@@ -18,7 +17,7 @@ export class KafkaRegistry {
      * Armazena os ouvintes registrados para os tópicos Kafka.
      * @private
      */
-    private static listeners: Listeners = [];
+    private static listeners: Listener[] = [];
 
     /**
      * Registra uma função para processar mensagens de um tópico Kafka.
@@ -64,7 +63,7 @@ export class KafkaRegistry {
             ...config,
             eachMessage: async (data) => {
                 const formattedMessage = KafkaRegistry.formatMessage({ ...data.message, });
-                const input: IKafkaMessage = { message: formattedMessage, consumer, topic: data.topic, partition: data.partition }
+                const input: IKafkaMessage = { message: formattedMessage, ctx: { consumer, topic: data.topic, partition: data.partition } }
                 await KafkaRegistry.executeMethod(methodToExecute, target, input);
             },
         });

@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { KafkaRegistry } from '../utils/kafka-registry';
+import { KafkaRegistry } from '../registry/kafka-registry';
 import { IKafkaMessage } from '../types/kafka-message.interface';
 
 const app = express();
@@ -10,10 +10,10 @@ function create(payload: IKafkaMessage) {
     console.log('Mensagem recebida do Kafka (test-function-topic):', payload.message.value);
 
     // Fazendo o commit manual do offset
-    payload.consumer.commitOffsets([
+    payload.ctx.consumer.commitOffsets([
         {
-            topic: payload.topic,               // O tópico da mensagem
-            partition: payload.partition,       // A partição da mensagem
+            topic: payload.ctx.topic,               // O tópico da mensagem
+            partition: payload.ctx.partition,       // A partição da mensagem
             offset: (parseInt(payload.message.offset) + 1).toString()  // O próximo offset
         }
     ]);
