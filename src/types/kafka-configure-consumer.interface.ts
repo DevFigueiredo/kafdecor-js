@@ -1,4 +1,4 @@
-import { Consumer, ConsumerRunConfig } from "../@types/kafka";
+import { Consumer, ConsumerRunConfig } from "kafkajs";
 import { IKafkaConsumerOptions } from "./kafka-consumer-options.interface";
 
 export interface IKafkaConfigureConsumer {
