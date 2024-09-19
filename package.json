@@ -16,7 +16,8 @@
     "build": "tsc",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build",
-    "release": "np ",
+    "release": "np",
+		"release:no-publish": "np --no-publish",
     "test": "jest",
     "test:cov": "jest --collect-coverage"
   },
