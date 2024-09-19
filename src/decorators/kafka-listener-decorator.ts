@@ -13,6 +13,12 @@ import { KafkaRegistry } from "../registry/kafka-registry";
  */
 export function KafkaListener(options: IKafkaConsumerOptions): any {
     return function (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor) {
-        KafkaRegistry.register(target[propertyKey], options);
+        // Verifica se o método é uma função antes de registrar
+        const method = typeof target == "function" ? target: target[propertyKey];
+        if (typeof method === 'function') {
+            KafkaRegistry.register(method, options);
+        } else {
+            throw new Error(`O método ${String(propertyKey)} não é uma função.`);
+        }
     };
 }
