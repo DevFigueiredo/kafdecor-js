@@ -21,7 +21,7 @@
     "test": "jest",
     "test:cov": "jest --collect-coverage"
   },
-  "dependencies": {
+  "peerDependencies": {
     "kafkajs": "^2.2.4"
   },
   "devDependencies": {
