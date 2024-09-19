@@ -16,8 +16,8 @@
     "build": "tsc && copyfiles -u 1 src/**/*.d.ts dist",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build",
-    "release": "np --no-publish",
-    "release:publish": "np",
+    "release": "npx np --no-publish",
+    "release:publish": "npx np",
     "test": "jest",
     "test:cov": "jest --collect-coverage"
   },
