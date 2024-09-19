@@ -39,6 +39,7 @@
   "files": [
     "dist",
     "src/docs",
+    "src/types/kafka.d.ts",
     "README.md"
   ]
 }
