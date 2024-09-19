@@ -13,7 +13,12 @@ import { KafkaRegistry } from "../registry/kafka-registry";
  */
 export function KafkaListener(options: IKafkaConsumerOptions) {
     return function (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor) {
-        // Registra o listener no registry global
-        KafkaRegistry.register(target[propertyKey], options);
+        if (descriptor) {
+            // Método de instância
+            KafkaRegistry.register(target[propertyKey], options);
+        } else {
+            // Método estático
+            KafkaRegistry.register(target[propertyKey], options);
+        }
     };
 }
