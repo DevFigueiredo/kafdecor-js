@@ -23,7 +23,7 @@ Esta biblioteca facilita a integração do Kafka, permitindo que você use decor
 Para começar a usar a biblioteca, instale as dependências necessárias com o npm:
 
 ```bash
-npm install kafdecor-js
+npm install kafdecor-js kafkajs
 ```
 
 Ou com o yarn:
