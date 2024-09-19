@@ -1,12 +1,13 @@
 name: Publish to npm
 
 on:
-  push:
-    tags:
-      - 'v*'  # O pipeline será disparado ao criar uma tag que comece com 'v'
-
+  workflow_dispatch:
+  release:
+      types: [released]
+      
 jobs:
   publish:
+    environment: Production
     runs-on: ubuntu-latest
 
     steps:
