@@ -45,7 +45,7 @@ npm install kafdecor-js kafkajs
 Ou com o yarn:
 
 ```bash
-yarn add kafdecor-js
+yarn add kafdecor-js kafkajs
 ```
 
 ## Configuração do Servidor Express
