@@ -12,7 +12,7 @@ import { KafkaRegistry } from "../registry/kafka-registry";
  * @returns Um decorador que registra o método como ouvinte de mensagens Kafka.
  */
 export function KafkaListener(options: IKafkaConsumerOptions) {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    return function (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor) {
         // Registra o listener no registry global
         KafkaRegistry.register(target[propertyKey], options);
     };
