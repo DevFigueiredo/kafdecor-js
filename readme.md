@@ -1,4 +1,3 @@
-
 # KafkDecorJS
 
 Uma biblioteca para integração simples e eficaz do Kafka. Esta biblioteca permite que você consuma mensagens do Kafka usando decoradores e funções, facilitando a configuração e o gerenciamento de consumidores Kafka em projetos Node.js com Express.
@@ -11,6 +10,7 @@ Uma biblioteca para integração simples e eficaz do Kafka. Esta biblioteca perm
 - [Uso de Decoradores para Processamento de Mensagens](#uso-de-decoradores-para-processamento-de-mensagens)
 - [Registro de Funções para Processamento de Mensagens](#registro-de-funções-para-processamento-de-mensagens)
 - [Exemplo Completo](#exemplo-completo)
+- [Exemplo com Commit Manual de Offset](#exemplo-com-commit-manual-de-offset)
 - [Contribuição](#contribuição)
 - [Licença](#licença)
 
@@ -26,7 +26,7 @@ Para começar a usar a biblioteca, instale as dependências necessárias com o n
 npm install kafdecor-js
 ```
 
-Para começar a usar a biblioteca, instale as dependências necessárias com o yarn:
+Ou com o yarn:
 
 ```bash
 yarn add kafdecor-js
@@ -37,18 +37,19 @@ yarn add kafdecor-js
 Crie um servidor Express básico e configure a integração com o Kafka:
 
 ```typescript
-import express from 'express';
-import { KafkaRegistry, IKafkaMessage } from 'kafdecor-js'; // Importa a configuração do Kafka
+import express from "express";
+import { KafkaRegistry, IKafkaMessage } from "kafdecor-js";
 
 const app = express();
 const port = 3002;
 
-// Inicia o servidor Express
 app.listen(port, async () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 
-    // Configura o Kafka e registra funções de processamento
-    await KafkaRegistry.start({ brokers: ['localhost:9092'], clientId: 'express-test' });
+  await KafkaRegistry.start({
+    brokers: ["localhost:9092"],
+    clientId: "express-test",
+  });
 });
 ```
 
@@ -57,44 +58,42 @@ app.listen(port, async () => {
 Use decoradores para associar métodos de uma classe a tópicos Kafka:
 
 ```typescript
-import { KafkaListener, IKafkaMessage } from 'kafdecor-js';
+import { KafkaListener, IKafkaMessage } from "kafdecor-js";
 
 export class Controller {
-    @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
-    static handleMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
-    }
-
-    @KafkaListener({ topic: 'test-another-topic', groupId: 'test-group-another' })
-    static handleAnotherMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-another-topic):', payload.message);
-    }
+  @KafkaListener({ topic: "test-topic", groupId: "test-group" })
+  static handleMessage(payload: IKafkaMessage) {
+    console.log("Mensagem recebida do Kafka (test-topic):", payload.message);
+  }
 }
 ```
-
-### Explicação dos Decoradores
-
-- **`@KafkaListener`**: Associa um método a um tópico Kafka. Quando uma mensagem é recebida no tópico, o método decorado é chamado com a mensagem.
 
 ## Registro de Funções para Processamento de Mensagens
 
 Você também pode registrar funções diretamente para processar mensagens:
 
 ```typescript
-import { KafkaRegistry, IKafkaMessage } from 'kafdecor-js';
+import { KafkaRegistry, IKafkaMessage } from "kafdecor-js";
 
 function exampleFunctionKafka(payload: IKafkaMessage) {
-    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload.message));
+  console.log(
+    "Mensagem recebida do Kafka (test-function-topic):",
+    JSON.stringify(payload.message)
+  );
 }
 
 app.listen(port, async () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 
-    // Registra a função de processamento de mensagens
-    KafkaRegistry.register(exampleFunctionKafka, { groupId: 'test-function-groupId', topic: 'test-function-topic' });
+  KafkaRegistry.register(exampleFunctionKafka, {
+    groupId: "test-function-groupId",
+    topic: "test-function-topic",
+  });
 
-    // Inicia a conexão com o Kafka
-    await KafkaRegistry.start({ brokers: ['localhost:9092'], clientId: 'express-test' });
+  await KafkaRegistry.start({
+    brokers: ["localhost:9092"],
+    clientId: "express-test",
+  });
 });
 ```
 
@@ -103,29 +102,86 @@ app.listen(port, async () => {
 Aqui está um exemplo completo combinando tudo o que foi discutido:
 
 ```typescript
-import express from 'express';
-import { KafkaRegistry, KafkaListener,IKafkaMessage } from 'kafdecor-js';
+import express from "express";
+import { KafkaRegistry, KafkaListener, IKafkaMessage } from "kafdecor-js";
 
 const app = express();
 const port = 3002;
 
 export class Controller {
-    @KafkaListener({ topic: 'test-topic', groupId: 'test-group' })
-    static handleMessage(payload: IKafkaMessage) {
-        console.log('Mensagem recebida do Kafka (test-topic):', payload.message);
-    }
+  @KafkaListener({ topic: "test-topic", groupId: "test-group" })
+  static handleMessage(payload: IKafkaMessage) {
+    console.log("Mensagem recebida do Kafka (test-topic):", payload.message);
+  }
 }
 
 function exampleFunctionKafka(payload: IKafkaMessage) {
-    console.log('Mensagem recebida do Kafka (test-function-topic):', JSON.stringify(payload.message));
+  console.log(
+    "Mensagem recebida do Kafka (test-function-topic):",
+    JSON.stringify(payload.message)
+  );
 }
 
 app.listen(port, async () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 
-    KafkaRegistry.register(exampleFunctionKafka, { groupId: 'test-function-groupId', topic: 'test-function-topic' });
+  KafkaRegistry.register(exampleFunctionKafka, {
+    groupId: "test-function-groupId",
+    topic: "test-function-topic",
+  });
 
-    await KafkaRegistry.start({ brokers: ['localhost:9092'], clientId: 'express-test' });
+  await KafkaRegistry.start({
+    brokers: ["localhost:9092"],
+    clientId: "express-test",
+  });
+});
+```
+
+## Exemplo com Commit Manual de Offset
+
+Neste exemplo, adicionamos o commit manual de offset, útil para garantir que a mensagem só seja marcada como consumida após o processamento ser concluído com sucesso:
+
+```typescript
+import express, { Request, Response } from "express";
+import { KafkaRegistry } from "kafdecor-js";
+import { IKafkaMessage } from "kafdecor-js";
+
+const app = express();
+const port = 3002;
+
+// Exemplo usando função de callback com commit manual
+function create(payload: IKafkaMessage) {
+  console.log(
+    "Mensagem recebida do Kafka (test-function-topic):",
+    payload.message.value
+  );
+
+  // Fazendo o commit manual do offset
+  payload.ctx.consumer.commitOffsets([
+    {
+      topic: payload.ctx.topic, // O tópico da mensagem
+      partition: payload.ctx.partition, // A partição da mensagem
+      offset: (parseInt(payload.message.offset) + 1).toString(), // O próximo offset
+    },
+  ]);
+}
+
+app.listen(port, async () => {
+  // Registra a função com commit manual de offset
+  KafkaRegistry.register(create, {
+    topic: "test-function-topic",
+    groupId: "group-id",
+  });
+
+  await KafkaRegistry.start({
+    brokers: ["localhost:9092"],
+    clientId: "express-test",
+    config: {
+      autoCommit: false, // Desativa o auto-commit automático
+    },
+  });
+
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
 ```
 
