@@ -16,7 +16,7 @@
     "build": "tsc",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build",
-    "release": "np --no-publish"
+    "release": "np "
   },
   "dependencies": {
     "kafkajs": "^2.2.4"
