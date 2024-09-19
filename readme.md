@@ -1,6 +1,22 @@
-# KafkDecorJS
+# KafDecorJS
 
 Uma biblioteca para integração simples e eficaz do Kafka. Esta biblioteca permite que você consuma mensagens do Kafka usando decoradores e funções, facilitando a configuração e o gerenciamento de consumidores Kafka em projetos Node.js com Express.
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/kafdecor-js" target="_blank">
+    <img src="https://img.shields.io/npm/v/kafdecor-js.svg" alt="NPM Version" />
+  </a>
+  <a href="https://www.npmjs.com/package/kafdecor-js" target="_blank">
+    <img src="https://img.shields.io/npm/l/kafdecor-js.svg" alt="Package License" />
+  </a>
+  <a href="https://www.npmjs.com/package/kafdecor-js" target="_blank">
+    <img src="https://img.shields.io/npm/dm/kafdecor-js.svg" alt="NPM Downloads" />
+  </a>
+  <a href="https://circleci.com/gh/DevFigueiredo/kafdecor-js" target="_blank">
+    <img src="https://img.shields.io/circleci/build/github/DevFigueiredo/kafdecor-js/master" alt="CircleCI" />
+  </a>
+ 
+</p>
 
 ## Tabelas de Conteúdo
 
