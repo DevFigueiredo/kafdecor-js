@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/DevFigueiredo/kafdecor-js.git"
   },
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/package/kafdecor-js"
+  },
   "scripts": {
     "example01": "tsx watch src/examples/01-example-server-express.ts",
     "example02": "tsx watch src/examples/02-example-server-express-functions.ts",
